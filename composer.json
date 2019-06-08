@@ -1,0 +1,21 @@
+{
+    "name": "chrisharrison/lock-git-driver",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Harrison",
+            "email": "c.harrison1988@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "chrisharrison/lock": "^1.0",
+        "czproject/git-php": "^3.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChrisHarrison\\LockGitDriver\\": "src/"
+        }
+    }
+}
