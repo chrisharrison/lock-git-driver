@@ -8,7 +8,11 @@ use ChrisHarrison\Lock\Lock;
 use ChrisHarrison\Lock\LockDriver\LockDriver;
 use ChrisHarrison\Lock\LockSerialiser\LockSerialiser;
 use Cz\Git\GitRepository;
+use Exception;
+use function file_exists;
 use function file_get_contents;
+use function is_dir;
+use Throwable;
 
 final class GitLockDriver implements LockDriver
 {
@@ -38,6 +42,9 @@ final class GitLockDriver implements LockDriver
         $repo = $this->repo();
         $repo->pull();
 
+        if (!file_exists($path)) {
+            return Lock::null();
+        }
         $file = file_get_contents($path);
         if ($file === false) {
             return Lock::null();
@@ -61,6 +68,10 @@ final class GitLockDriver implements LockDriver
         {
             return $this->repo;
         }
-        return GitRepository::cloneRepository($this->repoUrl, $this->repoPath);
+        if (is_dir($this->repoPath . '/.git')) {
+            return $this->repo = new GitRepository($this->repoPath);
+        } else {
+            return $this->repo = GitRepository::cloneRepository($this->repoUrl, $this->repoPath);
+        }
     }
 }
