@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "chrisharrison/lock": "^1.0 || ^2.0",
+        "chrisharrison/lock": "^1.0 || ^2.0 || ^3.0",
         "czproject/git-php": "^3.17"
     },
     "autoload": {
